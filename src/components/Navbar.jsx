@@ -60,8 +60,7 @@ export default function Navbar({ role, onRoleSwitch }) {
             </button>
           ) : (
             <div className="flex items-center gap-2 cursor-pointer border border-gray-200 px-3 py-1 rounded-full hover:bg-gray-50 transition-all">
-              <div className="w-7 h-7 rounded-full bg-orange-500 flex items-center justify-center text-white text-xs font-bold">TA</div>
-              <span className="text-sm font-semibold text-gray-800">Tom Aspinall</span>
+            <span className="text-sm font-semibold text-gray-800">Logout</span>
               <ChevronDown size={13} className="text-gray-400" />
             </div>
           )}

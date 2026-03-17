@@ -102,3 +102,37 @@ export const fetchNutritionistAppointments = async (
 
   return res.json();
 };
+// ------------------
+// Cancel Appointment
+// ------------------
+export const cancelAppointment = async (appointmentId) => {
+  const res = await fetch(`${BASE}/appointments/${appointmentId}/cancel/`, {
+    method: "PATCH", // Status update ke liye PATCH best hai
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Cancellation failed");
+  }
+
+  return res.json();
+};
+
+export const rescheduleAppointment = async (appointmentId, newDate, newTime) => {
+  // Yahan BASE_URL ko badal kar BASE kar diya hai
+  const res = await fetch(`${BASE}/appointments/${appointmentId}/reschedule/`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      appointment_date: newDate,
+      start_time: newTime
+    })
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.detail || "Rescheduling failed");
+  }
+  return res.json();
+};
