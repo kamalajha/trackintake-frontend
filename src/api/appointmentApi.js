@@ -1,4 +1,5 @@
-
+// Vite .env se URL uthayega. Vercel par iski value ye honi chahiye:
+// https://trackintake-backend-hmly.onrender.com/api
 const BASE = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
 // ------------------
@@ -7,6 +8,14 @@ const BASE = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 export const fetchNutritionists = async () => {
   const res = await fetch(`${BASE}/nutritionists/`);
   if (!res.ok) throw new Error("Nutritionists fetch failed");
+  return res.json();
+};
+export const fetchNutritionistAppointments = async (nutritionistId, date = null) => {
+  const params = new URLSearchParams({ nutritionist_id: nutritionistId });
+  if (date) params.append("date", date);
+
+  const res = await fetch(`${BASE}/appointments/?${params}`);
+  if (!res.ok) throw new Error("Fetch failed");
   return res.json();
 };
 
