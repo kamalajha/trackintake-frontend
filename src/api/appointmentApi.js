@@ -1,5 +1,5 @@
-const BASE = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
+const BASE = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
 // ------------------
 // Nutritionists
@@ -10,12 +10,10 @@ export const fetchNutritionists = async () => {
   return res.json();
 };
 
-
 // ------------------
-// Slots
+// Slots (Available slots for a specific date)
 // ------------------
 export const fetchSlots = async (nutritionistId, date) => {
-  // Agar ID nahi hai, toh call mat karo
   if (!nutritionistId || nutritionistId === "undefined") {
     console.warn("fetchSlots called without a valid nutritionistId");
     return []; 
@@ -29,9 +27,8 @@ export const fetchSlots = async (nutritionistId, date) => {
   return res.json();
 };
 
-
 // ------------------
-// Book Appointment
+// Book Appointment (POST)
 // ------------------
 export const bookAppointment = async ({
   userId,
@@ -41,11 +38,9 @@ export const bookAppointment = async ({
   topic,
   appointmentType
 }) => {
-
   const res = await fetch(`${BASE}/appointments/book/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-
     body: JSON.stringify({
       user_id: userId,
       nutritionist_id: nutritionistId,
@@ -64,50 +59,21 @@ export const bookAppointment = async ({
   return res.json();
 };
 
-
 // ------------------
-// User Appointments
+// User Appointments (List)
 // ------------------
 export const fetchUserAppointments = async (userId) => {
-
-  const res = await fetch(
-    `${BASE}/appointments/?user_id=${userId}`
-  );
-
-  if (!res.ok) throw new Error("Fetch failed");
-
+  const res = await fetch(`${BASE}/appointments/?user_id=${userId}`);
+  if (!res.ok) throw new Error("Fetch user appointments failed");
   return res.json();
 };
 
-
 // ------------------
-// Nutritionist Appointments
-// ------------------
-export const fetchNutritionistAppointments = async (
-  nutritionistId,
-  date = null
-) => {
-
-  const params = new URLSearchParams({
-    nutritionist_id: nutritionistId
-  });
-
-  if (date) params.append("date", date);
-
-  const res = await fetch(
-    `${BASE}/appointments/?${params}`
-  );
-
-  if (!res.ok) throw new Error("Fetch failed");
-
-  return res.json();
-};
-// ------------------
-// Cancel Appointment
+// Cancel Appointment (PATCH)
 // ------------------
 export const cancelAppointment = async (appointmentId) => {
   const res = await fetch(`${BASE}/appointments/${appointmentId}/cancel/`, {
-    method: "PATCH", // Status update ke liye PATCH best hai
+    method: "PATCH",
     headers: { "Content-Type": "application/json" },
   });
 
@@ -119,8 +85,10 @@ export const cancelAppointment = async (appointmentId) => {
   return res.json();
 };
 
+// ------------------
+// Reschedule Appointment (PATCH)
+// ------------------
 export const rescheduleAppointment = async (appointmentId, newDate, newTime) => {
-  // Yahan BASE_URL ko badal kar BASE kar diya hai
   const res = await fetch(`${BASE}/appointments/${appointmentId}/reschedule/`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
