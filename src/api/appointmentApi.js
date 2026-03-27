@@ -54,7 +54,7 @@ export const bookAppointment = async ({
       user: userId,
       nutritionist: nutritionistId,
       appointment_date: date,
-      start_time: `${time}:00`,
+      start_time: time,
       topic: topic || "Nutrition Consultation",
       appointment_type: appointmentType || "virtual"
     })
