@@ -51,10 +51,10 @@ export const bookAppointment = async ({
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      user_id: userId,
-      nutritionist_id: nutritionistId,
+      user: userId,
+      nutritionist: nutritionistId,
       appointment_date: date,
-      start_time: time,
+      start_time: `${time}:00`,
       topic: topic || "Nutrition Consultation",
       appointment_type: appointmentType || "virtual"
     })
