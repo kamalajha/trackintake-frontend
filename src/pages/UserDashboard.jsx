@@ -63,8 +63,8 @@ export default function UserDashboard() {
     setSelectedSlot(slot.time);
     try {
       const apt = await bookAppointment({
-        user: currentUser.id,
-        nutritionist: selectedId,
+        userId: currentUser.id,
+        nutritionistId: selectedId,
         date: selectedDate,
         time: slot.time,
         topic: "Nutrition Consultation",
@@ -73,9 +73,9 @@ export default function UserDashboard() {
       setBookedApt(apt);
       setSlots([]);
       setSelectedSlot(null);
-      alert("✅ Appointment Booked!");
+      alert(" Appointment Booked!");
     } catch (e) {
-      alert("❌ Error: " + e.message);
+      alert(" Error: " + e.message);
     } finally {
       setBooking(false);
     }
