@@ -4,7 +4,7 @@ import {
   UserPlus, TrendingUp, Loader2, ChevronRight, Filter,
   CheckCircle2, XCircle, ExternalLink
 } from "lucide-react";
-import { today } from "../data/mockData";
+const today = new Date().toISOString().split('T')[0];
 import { fetchNutritionistAppointments, cancelAppointment } from "../api/appointmentApi";
 
 // --- Sub-Component: Status Badge ---
