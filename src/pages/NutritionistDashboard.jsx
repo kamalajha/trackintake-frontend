@@ -151,7 +151,7 @@ export default function NutritionistDashboard() {
 
                     <div className="flex items-center gap-2 w-full md:w-auto justify-end">
                       {apt.appointment_type === 'virtual' && apt.status === 'confirmed' && (
-                        <a href={apt.host_join_url} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-bold text-xs shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
+                        <a href={apt.host_join_url} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-2.5 bg-orange-600 text-white rounded-xl font-bold text-xs shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
                           <Video size={16} /> START
                         </a>
                       )}
