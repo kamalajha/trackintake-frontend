@@ -63,8 +63,8 @@ export default function UserDashboard() {
     setSelectedSlot(slot.time);
     try {
       const apt = await bookAppointment({
-        userId: currentUser.id,
-        nutritionistId: selectedId,
+        user: currentUser.id,
+        nutritionist: selectedId,
         date: selectedDate,
         time: slot.time,
         topic: "Nutrition Consultation",
