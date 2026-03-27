@@ -41,7 +41,7 @@ export default function NutritionistDashboard() {
       setLoading(true);
       try {
         const [todayData, allData] = await Promise.all([
-          fetchNutritionistAppointments(currentDoctor.name, today),
+          fetchNutritionistAppointments(currentDoctor.id, today),
           fetchNutritionistAppointments(currentDoctor.name)
         ]);
         setAppointments({ today: todayData, all: allData });
